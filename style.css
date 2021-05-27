@@ -13,7 +13,6 @@ html {
 }
 
 body {
-  /* background-image: cf. header.php */
   background-attachment: fixed;
   width: 100vh;
   height: 100%;
