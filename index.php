@@ -2,7 +2,7 @@
 include "header.php";
 ?>
 
-<!-- Le HTML -->
+<!-- Le HTML --> 
 
 <main id="main" class="container">
   <div class="slider">
@@ -71,7 +71,7 @@ include "header.php";
 
               ?>
 
-              <div class="col-md-3">
+              <div class="col-sm-6 col-md-3">
                 <div class="product-top">
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
                   <div class="overlay-right">
@@ -129,7 +129,7 @@ include "header.php";
                 while ($donnees = $query->fetch()) {
               ?>
 
-              <div class="col-md-3">
+              <div class="col-sm-6 col-md-3">
                 <div class="product-top">
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
                   <div class="overlay-right">
@@ -181,7 +181,7 @@ include "header.php";
                 while ($donnees = $query->fetch()) {
               ?>
 
-              <div class="col-md-3"> 
+              <div class="col-sm-6 col-md-3"> 
                 <div class="product-top">
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
                   <div class="overlay-right">

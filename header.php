@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Robin DE MARCH, Ali SYED & Philippe PERECHODOV">
+  <meta name="author" content="Robin DE MARCH, Ali Raza SYED & Philippe PERECHODOV">
   <title>GRAP.fr - Games by R, A & P</title>
 
   <!-- Bootstrap CSS -->
