@@ -24,169 +24,149 @@
 
 <div class="layer">
 
-<!-- Connection à la base de donnée (Début)-->
+      <!-- Connection à la base de donnée (Début)-->
+
+        <?php
+
+            try {
+
+                $bdd = new PDO('mysql:host=localhost;dbname=catalogueacs;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+            } catch (PDOException $e) {
+
+                die('Ereur : ' . $e->getMessage());
+
+            }
+
+            function debug($var, $style = "")
+            {
+
+                echo "<pre style='background-color: white; border: gray 1px solid; border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; color: black; width: 95%; padding: 10px; overflow-y: auto;{$style}'>";
+
+                var_dump($var);
+
+                echo "</pre>";
+
+            }
+
+        ?>
+
+    <!-- Connection à la base de donnée (Fin)-->
+
+
+
+  <!-- Pour afficher les informations de l'entrée de la table "jeux" séléctionnée par le bouton "Modifier" de la page "admin.php" (Début)-->
 
   <?php
 
-  try {
+      if (isset($_GET['idSelect'])) {
 
-    $bdd = new PDO('mysql:host=localhost;dbname=catalogueacs;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+          $select_Ent_Jeux = $bdd->prepare('SELECT id, Titre, Description, Prix, LienCover, Plateforme, DateSortie, BestSeller, NbrJoueur, Categorie, Special FROM jeux WHERE id = :idSelect');
 
-  }
+          $select_Ent_Jeux->execute(array(':idSelect' => $_GET['idSelect']));
 
-    catch(PDOException $e)
+          $row_idSelect = $select_Ent_Jeux->fetch();
 
-  {
-
-    die('Ereur : '.$e->getMessage());
-
-  }
-
-  function debug($var, $style = "")
-
-  {
-
-    echo "<pre style='background-color: white; border: gray 1px solid; border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; color: black; width: 95%; padding: 10px; overflow-y: auto;{$style}'>";
-
-    var_dump($var);
-
-    echo "</pre>";
-
-  }
+      }
 
   ?>
 
-<!-- Connection à la base de donnée (Fin)-->
+  <!-- Pour afficher les informations de l'entrée de la table "jeux" séléctionnée par le bouton "Modifier" de la page "admin.php" (Fin)-->
 
-
-
-<!-- Pour afficher les informations de l'entrée de la table "jeux" séléctionnée par le bouton "Modifier" de la page "admin.php" (Début)-->
+  <!-- Fonction de connexion avec login (Début) -->
 
   <?php
 
-  if (isset($_GET['idSelect'])) {
+      // On prolonge la session sauf sur la page admin.php car la vérif de la session se fait avant l'include du header.php
 
-    $select_Ent_Jeux = $bdd->prepare('SELECT id, Titre, Description, Prix, LienCover, Plateforme, DateSortie, BestSeller, NbrJoueur, Categorie, Special FROM jeux WHERE id = :idSelect');
+      if (!stripos($_SERVER['PHP_SELF'], 'admin.php')) {
 
-    $select_Ent_Jeux->execute(array(':idSelect'=>$_GET['idSelect']));
+          session_start();
 
-    $row_idSelect = $select_Ent_Jeux->fetch();
+      }
 
-  }
+      // On teste si la variable de session existe et contient une valeur
 
-  ?>
+        if (!isset($_SESSION['login'])) {
 
-<!-- Pour afficher les informations de l'entrée de la table "jeux" séléctionnée par le bouton "Modifier" de la page "admin.php" (Fin)-->
+            // Si inexistante ou nulle, affiche message de base + lien pour la page de login avec le message "Se connecter"
 
-<!-- Fonction de connexion avec login (Début) -->
+            $client = " visiteur(euse)";
 
-<?php
+            $connexion = "<i class=\"fas fa-headset\"></i> Se connecter à mon compte";
 
-// On prolonge la session sauf sur la page admin.php car la vérif de la session se fait avant l'include du header.php
+            $goLog = "login";
 
-  if (!stripos($_SERVER['PHP_SELF'], 'admin.php')) {
+            $admin = "";
 
-    session_start();
+        } else {
 
-  }
+            // Si existante, affiche message personnalisé + lien pour la page de logout avec le message "Se déconnecter"
 
+            $client = $_SESSION['prenom'] . " " . $_SESSION['nom'];
 
-  // On teste si la variable de session existe et contient une valeur
+            $connexion = "<i class=\"fas fa-ghost\"></i> Me déconnecter";
 
-  if(!isset($_SESSION['login']))
+            $goLog = "logout";
 
-  {
+            if ($_SESSION['admin']) {
 
-    // Si inexistante ou nulle, affiche message de base + lien pour la page de login avec le message "Se connecter"
+                // Affiche le lien vers la page d'administration
 
-    $client = " visiteur(euse)";
+                $admin = "<i class=\"fas fa-chess-king\"></i> Administration";
 
-    $connexion = "<i class=\"fas fa-headset\"></i> Se connecter à mon compte";
+            } else {
 
-    $goLog = "login";
+                $admin = "";
 
-    $admin = "";
+            }
 
-  }
-
-  else {
-
-    // Si existante, affiche message personnalisé + lien pour la page de logout avec le message "Se déconnecter"
-
-    $client = $_SESSION['prenom'] . " " . $_SESSION['nom'];
-
-    $connexion = "<i class=\"fas fa-ghost\"></i> Me déconnecter";
-
-    $goLog = "logout";
-
-
-    if ($_SESSION['admin']) {
-
-      // Affiche le lien vers la page d'administration
-
-      $admin = "<i class=\"fas fa-chess-king\"></i> Administration";
-
-    }
-
-    else {
-
-      $admin = "";
-
-    }
-
-  }
+        }
 
   ?>
 
-<!-- Fonction de connexion avec login (Fin) -->
+  <!-- Fonction de connexion avec login (Fin) -->
 
 
-<!-- Pour le changement de background du "body" à partir des lien d'image dans la base de donnée (Début) -->
+  <!-- Pour le changement de background du "body" à partir des lien d'image dans la base de donnée (Début) -->
 
   <?php
 
-  if (stripos($_SERVER['PHP_SELF'], 'produit.php')) {
+        if (stripos($_SERVER['PHP_SELF'], 'produit.php')) {
 
-    $produitBG = htmlentities($_GET['idSelect']);
+            $produitBG = htmlentities($_GET['idSelect']);
 
+            $imageSelected = $bdd->query('SELECT lien AS lienBG FROM background WHERE id_jeu ="' . $produitBG . '"');
 
-    $imageSelected = $bdd->query('SELECT lien AS lienBG FROM background WHERE id_jeu ="' . $produitBG . '"');
+            $imageResultat = $imageSelected->fetch();
 
-    $imageResultat = $imageSelected->fetch();
+            $lienImage = $imageResultat['lienBG'];
 
-    $lienImage = $imageResultat['lienBG'];
+        } elseif (stripos($_SERVER['PHP_SELF'], '404.php')) {
 
-  }
+            $lienImage = "";
 
-  elseif (stripos($_SERVER['PHP_SELF'], '404.php')) {
+        } else {
 
+            // Pour avoir le nombre d'entrée dans la table "background"
 
-    $lienImage = "";
+            $nbrIdBG = $bdd->query("SELECT COUNT(id) AS nbrId FROM background");
 
-  }
+            $resultat = $nbrIdBG->fetch();
 
-  else {
+            $nbMax = $resultat['nbrId'];
 
-    // Pour avoir le nombre d'entrée dans la table "background"
+            // Le random avec, en nombre max, le nombre d'entrée déterminée
 
-    $nbrIdBG = $bdd->query("SELECT COUNT(id) AS nbrId FROM background");
+            $numero = rand(1, $nbMax);
 
-    $resultat = $nbrIdBG->fetch();
+            $imageSelected = $bdd->query("SELECT lien AS lienBG FROM background WHERE id='{$numero}'");
 
-    $nbMax = $resultat['nbrId'];
+            $imageResultat = $imageSelected->fetch();
 
+            $lienImage = $imageResultat['lienBG'];
 
-    // Le random avec, en nombre max, le nombre d'entrée déterminée
-
-    $numero = rand(1, $nbMax);
-
-    $imageSelected = $bdd->query("SELECT lien AS lienBG FROM background WHERE id='{$numero}'");
-
-    $imageResultat = $imageSelected->fetch();
-
-    $lienImage = $imageResultat['lienBG'];
-
-  }
+        }
 
   ?>
 
@@ -205,36 +185,34 @@
 
   </style>
 
-<!-- Pour le changement de background du "body" à partir des lien d'image dans la base de donnée (Fin) -->
+    <!-- Pour le changement de background du "body" à partir des lien d'image dans la base de donnée (Fin) -->
 
 
-<!-- Pour l'affichage du message de bienvenue sur l'index.php uniquement (Début) -->
+    <!-- Pour l'affichage du message de bienvenue sur l'index.php uniquement (Début) -->
 
   <?php
 
-  if (stripos($_SERVER['PHP_SELF'], 'index.php')) {
+      if (stripos($_SERVER['PHP_SELF'], 'index.php')) {
 
-    $bienvenue = '<div id="realisation" class="row justify-content-around py-2 align-items-center">
+          $bienvenue = '<div id="realisation" class="row justify-content-around py-2 align-items-center">
 
-        <p class="mb-0"><i class="far fa-grin-alt"></i> Bienvenue sur GRAP.fr, ' . $client . ' !</p>
+              <p class="mb-0"><i class="far fa-grin-alt"></i> Bienvenue sur GRAP.fr, ' . $client . ' !</p>
 
-      </div>';
+            </div>';
 
-  }
+      } else {
 
-  else {
+          $bienvenue = null;
 
-    $bienvenue = null;
-
-  }
+      }
 
   ?>
 
-<!-- Pour l'affichage du message de bienvenue sur l'index.php uniquement (Fin) -->
+  <!-- Pour l'affichage du message de bienvenue sur l'index.php uniquement (Fin) -->
 
 
 
-<!-- Le HTML -->
+  <!-- Le HTML -->
 
   <nav id="navBarre" class="container-fluid fixed-top">
 
@@ -263,7 +241,8 @@
     <?php
 
     echo $bienvenue;
-    
-    ?>
 
-  </nav>
+    ?>
+</div>
+
+  <!-- </nav> -->
