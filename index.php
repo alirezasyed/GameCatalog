@@ -5,96 +5,166 @@ include "header.php";
 <!-- Le HTML --> 
 
 <main id="main" class="container">
+
   <div class="slider">
+
     <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
+
       <div class="carousel-inner">
 
         <?php
+
           $nbrIdBG = $bdd->query("SELECT COUNT(id) AS nbrId FROM background");
+
           $resultat = $nbrIdBG->fetch();
+
           $nbMax = $resultat['nbrId'];
 
           // Le random avec, en nombre max, le nombre d'entrée déterminée
           $numeroPre = 0;
+
           $idTest = 0;
+
           $idTest2 = 0;
+
           for ($cnt = 0; $cnt < 3; $cnt++) {
+
             while ($idTest == $numeroPre || $idTest2 == $numeroPre) {
+
               $numero = rand(1, $nbMax);
+
               $testPoss = $bdd->query("SELECT id_jeu FROM background WHERE id='{$numero}'");
+
               $testRecup = $testPoss->fetch();
+
               $idTest2 = $idTest;
+
               $idTest = $testRecup['id_jeu'];
+
             }
 
             $imageCarousel = $bdd->query("SELECT * FROM background WHERE id='{$numero}'");
 
+
             while($imageFinal = $imageCarousel->fetch()){
+
               $lienImage = $imageFinal['lien'];
+
               $idJeu = $imageFinal['id_jeu'];
+
             }
         ?>
 
+
         <div class="carousel-item <?php if($cnt < 1 ) echo "active";?>">
+
           <a href="produit.php?idSelect=<?= $idJeu ?>">
+
             <img src="<?= $lienImage ?>" class="d-block w-100">
+
           </a>
+
         </div>
 
+
         <?php
+
          $numeroPre = $idJeu;
+
         }
+
         ?>
 
         <ol class="carousel-indicators">
+
           <li data-target="#slider" data-slide-to="0" class="active"></li>
+
           <li data-target="#slider" data-slide-to="1"></li>
+
           <li data-target="#slider" data-slide-to="2"></li>
+
         </ol>
+
       </div>
+
     </div>
+
   </div>
 
   <div class="container main-content">
+
     <div class="row">
+
       <div class="col-10">
+
         <section class="">
+
           <div class="container">
+
             <div class="title-box">
+
               <h2>Best Seller</h2>
+
             </div>
+
             <div class="row">
+
               <?php
 
                 $bestSeller = $bdd->query('SELECT id, Titre, Prix, LienCover FROM jeux WHERE BestSeller = 1');
+
                 while ($donnees = $bestSeller->fetch()) {
 
               ?>
 
               <div class="col-sm-6 col-md-3">
+
                 <div class="product-top">
+
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+
                   <div class="overlay-right">
+
                     <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
+
                       <i class="fa fa-eye"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
+
                       <i class="fa fa-heart-o"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
+
                       <i class="fa fa-shopping-cart"></i>
+
                     </a>
+
                   </div>
+
                 </div>
+
                 <div class="product-bottom text-center">
+                  
                   <i class="fa fa-star"></i>
+
                   <i class="fa fa-star"></i>
+
                   <i class="fa fa-star"></i>
+
                   <i class="fa fa-star"></i>
+
                   <i class="fa fa-star-half-o"></i>
+
                   <h5><?= $donnees['Titre'] ?></h5>
+
                   <h5><?= $donnees['Prix'] ?> €</h5>
+
                 </div>
+
               </div>
 
               <?php
@@ -102,52 +172,88 @@ include "header.php";
               ?>
 
             </div>
+
           </div>
+
         </section>
 
         <!-- deuxième row -->
+
         <section id="categorie" class="">
 
           <?php
+
           $categorie = "";
+
           if (isset($_POST['categorieSelect'])) {
+
             $categorie = " WHERE ";
+
             foreach($_POST["categorieSelect"] as $cs) $categorie .= ($categorie != " WHERE " ? " AND " : "") . 'Categorie LIKE "%' . htmlentities($cs) . '%"';
+
           }
 
             $query = $bdd->query('SELECT * FROM jeux' . $categorie);
+
             // echo 'SELECT * FROM jeux' . $categorie;
+
           ?>
 
           <div class="container">
+
             <div class="title-box">
+
               <h2>Catégorie</h2>
+
             </div>
+
             <div class="row">
 
+
               <?php
+
                 while ($donnees = $query->fetch()) {
+
               ?>
 
               <div class="col-sm-6 col-md-3">
+
                 <div class="product-top">
+
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+
                   <div class="overlay-right">
+
                     <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
+
                       <i class="fa fa-eye"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
+
                       <i class="fa fa-heart-o"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
+
                       <i class="fa fa-shopping-cart"></i>
+
                     </a>
+
                   </div>
+
                 </div>
+
                 <div class="product-bottom text-center">
+
                   <h5><?= $donnees['Titre'] ?></h5>
+
                   <h5><?= $donnees['Prix'] ?> €</h5>
+
                 </div>
+
               </div>
 
               <?php
@@ -155,51 +261,86 @@ include "header.php";
               ?>
 
             </div>
+
           </div>
+
         </section>
 
         <section id="plateforme" class="">
 
           <?php
+
           $plateforme = "";
+
           if (isset($_POST['plateformeSelect'])) {
+
             $plateforme = " WHERE ";
+
             foreach($_POST["plateformeSelect"] as $ps) $plateforme .= ($plateforme != " WHERE " ? " OR " : "") . 'Plateforme LIKE "%' . htmlentities($ps) . '%"';
+
           }
+
             $query = $bdd->query('SELECT * FROM jeux' . $plateforme);
 
 
           ?>
 
           <div class="container">
+
             <div class="title-box">
+
               <h2>Plateforme</h2>
+
             </div>
+
             <div class="row">
 
+
               <?php
+
                 while ($donnees = $query->fetch()) {
+
               ?>
 
+
               <div class="col-sm-6 col-md-3"> 
+
                 <div class="product-top">
+
                   <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+
                   <div class="overlay-right">
+
                     <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
+
                       <i class="fa fa-eye"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
+
                       <i class="fa fa-heart-o"></i>
+
                     </a>
+
                     <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
+
                       <i class="fa fa-shopping-cart"></i>
+
                     </a>
+
                   </div>
+
                 </div>
+
                 <div class="product-bottom text-center">
+
                   <h5><?= $donnees['Titre'] ?></h5>
+
                   <h5><?= $donnees['Prix'] ?> €</h5>
+
                 </div>
+
               </div>
 
               <?php
@@ -207,13 +348,20 @@ include "header.php";
               ?>
 
             </div>
+
           </div>
+
         </section>
 
+
         <hr>
+
         <div class="text-center">
+
           <a id="haut" href="index.php">Retour en haut de la page</a>
+
         </div>
+
         <hr>
 
       </div>
@@ -221,10 +369,15 @@ include "header.php";
       <div class="container col-2 bcolor rounded" id="sidebar">
 
               <div class="toggle-button" id="toggle-button">
+
                 <span></span>
+
                 <span></span>
+
                 <span></span>
+
               </div>   
+
 
               <div class="w-100 text-center px-2 py-4">
 
@@ -347,34 +500,63 @@ include "header.php";
 </div>
   <!-- website features -->
   <section class="website-features">
+
     <div class="container">
+
       <div class="row">
+
         <div class="col-md-3 feature-box">
+
           <img src="img/garant.jfif">
+
           <div class="feature-text">
+
             <p><b>100% Original items </b>are available at company</p>
+
           </div>
+
         </div>
+
         <div class="col-md-3 feature-box">
+
           <img src="img/return1.jpg">
+
           <div class="feature-text">
+
             <p><b>Return within 30 days </b>of receiving your order.</p>
+
           </div>
+
         </div>
+
         <div class="col-md-3 feature-box">
+
           <img src="img/free.webp">
+
           <div class="feature-text">
+
             <p><b>Get free delivery for every </b>order on more than price.</p>
+
           </div>
+
         </div>
+
         <div class="col-md-3 feature-box">
+
           <img src="img/pay.png">
+
           <div class="feature-text">
+
             <p><b>Pay Online through multiple</b>options (card/Net banking)</p>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+    
   </section>
 
 </main>
