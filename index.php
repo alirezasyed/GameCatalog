@@ -93,6 +93,9 @@ include "header.php";
 
     </div>
 
+
+    <!-- ========================= main-content ===================== -->
+
     <div class="container">
 
       <div class="main-content">
@@ -101,495 +104,490 @@ include "header.php";
 
           <div class="col-10">
 
-            <section>
+            <!-- <section> -->
 
-                <div class="container">
+            <div class="container">
 
-                  <div class="title-box">
+              <div class="title-box">
 
-                    <h2>Best Seller</h2>
+                <h2>Best Seller</h2>
 
-                  </div>
+              </div>
 
-                  <div class="row">
+              <div class="row">
 
-                      <?php
+                  <?php
 
-                        $bestSeller = $bdd->query('SELECT id, Titre, Prix, LienCover FROM jeux WHERE BestSeller = 1');
+                    $bestSeller = $bdd->query('SELECT id, Titre, Prix, LienCover FROM jeux WHERE BestSeller = 1');
 
-                        while ($donnees = $bestSeller->fetch()) {
+                    while ($donnees = $bestSeller->fetch()) {
 
-                      ?>
+                  ?>
 
-                    <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-3">
 
-                        <div class="product-top">
+                    <div class="product-top">
 
-                          <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+                      <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
 
-                          <div class="overlay-right">
+                      <div class="overlay-right">
 
-                            <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
+                        <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
 
-                              <i class="fa fa-eye"></i>
+                          <i class="fa fa-eye"></i>
 
-                            </a>
+                        </a>
 
-                            <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
+                        <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
 
-                              <i class="fa fa-heart-o"></i>
+                          <i class="fa fa-heart-o"></i>
 
-                            </a>
+                        </a>
 
-                            <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
+                        <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
 
-                              <i class="fa fa-shopping-cart"></i>
+                          <i class="fa fa-shopping-cart"></i>
 
-                            </a>
+                        </a>
 
-                          </div>
-
-                        </div>
-
-
-                        <div class="product-bottom text-center">
-                          
-                          <i class="fa fa-star"></i>
-
-                          <i class="fa fa-star"></i>
-
-                          <i class="fa fa-star"></i>
-
-                          <i class="fa fa-star"></i>
-
-                          <i class="fa fa-star-half-o"></i>
-
-                          <h5><?= $donnees['Titre'] ?></h5>
-
-                          <h5><?= $donnees['Prix'] ?> €</h5>
-
-                        </div>
+                      </div>
 
                     </div>
 
-                    <?php
-                      }
-                    ?>
 
-                  </div>
+                    <div class="product-bottom text-center">
+                      
+                      <i class="fa fa-star"></i>
+
+                      <i class="fa fa-star"></i>
+
+                      <i class="fa fa-star"></i>
+
+                      <i class="fa fa-star"></i>
+
+                      <i class="fa fa-star-half-o"></i>
+
+                      <h5><?= $donnees['Titre'] ?></h5>
+
+                      <h5><?= $donnees['Prix'] ?> €</h5>
+
+                    </div>
 
                 </div>
 
-            </section>                              
+                <?php
+                  }
+                ?>
+
+              </div>
+
+            </div>
+
+            <!-- </section>                               -->
             
             
-            <!-- ========================= deuxième row ===================== -->
+            <!-- ========================= categorie ===================== -->
             
 
-            <section id="categorie" class="">
+    <section id="categorie">
+
+        <?php
+
+        $categorie = "";
+
+        if (isset($_POST['categorieSelect'])) {
+
+          $categorie = " WHERE ";
+
+          foreach($_POST["categorieSelect"] as $cs) $categorie .= ($categorie != " WHERE " ? " AND " : "") . 'Categorie LIKE "%' . htmlentities($cs) . '%"';
+
+        }
+
+          $query = $bdd->query('SELECT * FROM jeux' . $categorie);
+
+          // echo 'SELECT * FROM jeux' . $categorie;
+
+        ?>
+
+      <div class="container">
+
+          <div class="title-box">
+
+            <h2>Catégorie</h2>
+
+          </div>
+
+          <div class="row">
+
+
+            <?php
+
+              while ($donnees = $query->fetch()) {
+
+            ?>
+
+            <div class="col-sm-6 col-md-3">
+
+              <div class="product-top">
+
+                <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+
+                <div class="overlay-right">
+
+                  <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
+
+                    <i class="fa fa-eye"></i>
+
+                  </a>
+
+                  <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
+
+                    <i class="fa fa-heart-o"></i>
+
+                  </a>
+
+                  <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
+
+                    <i class="fa fa-shopping-cart"></i>
+
+                  </a>
+
+                </div>
+
+              </div>
+
+              <div class="product-bottom text-center">
+
+                <h5><?= $donnees['Titre'] ?></h5>
+
+                <h5><?= $donnees['Prix'] ?> €</h5>
+
+              </div>
+
+            </div>
+
+            <?php
+              }
+            ?>
+
+          </div>
+
+      </div>
+
+    </section>
+
+
+
+            
+            <!-- ========================= plateforme ===================== -->
+
+    <section id="plateforme" class="">
+
+          <?php
+
+          $plateforme = "";
+
+          if (isset($_POST['plateformeSelect'])) {
+
+            $plateforme = " WHERE ";
+
+            foreach($_POST["plateformeSelect"] as $ps) $plateforme .= ($plateforme != " WHERE " ? " OR " : "") . 'Plateforme LIKE "%' . htmlentities($ps) . '%"';
+
+          }
+
+            $query = $bdd->query('SELECT * FROM jeux' . $plateforme);
+
+
+          ?>
+
+
+        <div class="container">
+
+            <div class="title-box">
+
+              <h2>Plateforme</h2>
+
+            </div>
+
+            <div class="row">
+
 
                 <?php
 
-                $categorie = "";
-
-                if (isset($_POST['categorieSelect'])) {
-
-                  $categorie = " WHERE ";
-
-                  foreach($_POST["categorieSelect"] as $cs) $categorie .= ($categorie != " WHERE " ? " AND " : "") . 'Categorie LIKE "%' . htmlentities($cs) . '%"';
-
-                }
-
-                  $query = $bdd->query('SELECT * FROM jeux' . $categorie);
-
-                  // echo 'SELECT * FROM jeux' . $categorie;
+                  while ($donnees = $query->fetch()) {
 
                 ?>
 
-              <div class="container">
 
-                  <div class="title-box">
+              <div class="col-sm-6 col-md-3"> 
 
-                    <h2>Catégorie</h2>
+                  <div class="product-top">
 
-                  </div>
+                    <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
 
-                  <div class="row">
+                    <div class="overlay-right">
 
+                      <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
 
-                    <?php
+                        <i class="fa fa-eye"></i>
 
-                      while ($donnees = $query->fetch()) {
+                      </a>
 
-                    ?>
+                      <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
 
-                    <div class="col-sm-6 col-md-3">
+                        <i class="fa fa-heart-o"></i>
 
-                      <div class="product-top">
+                      </a>
 
-                        <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
+                      <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
 
-                        <div class="overlay-right">
+                        <i class="fa fa-shopping-cart"></i>
 
-                          <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
-
-                            <i class="fa fa-eye"></i>
-
-                          </a>
-
-                          <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
-
-                            <i class="fa fa-heart-o"></i>
-
-                          </a>
-
-                          <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
-
-                            <i class="fa fa-shopping-cart"></i>
-
-                          </a>
-
-                        </div>
-
-                      </div>
-
-                      <div class="product-bottom text-center">
-
-                        <h5><?= $donnees['Titre'] ?></h5>
-
-                        <h5><?= $donnees['Prix'] ?> €</h5>
-
-                      </div>
+                      </a>
 
                     </div>
 
-                    <?php
-                      }
-                    ?>
+                  </div>
+
+                  <div class="product-bottom text-center">
+
+                    <h5><?= $donnees['Titre'] ?></h5>
+
+                    <h5><?= $donnees['Prix'] ?> €</h5>
 
                   </div>
 
               </div>
 
-            </section>
+              <?php
+                }
+              ?>
 
+            </div>
 
+        </div>
 
+    </section>
 
+        <hr>
 
+            
+    <div class="text-center">
 
+       <a id="haut" href="index.php">Retour en haut de la page</a>
 
+    </div>
 
+    <hr>
 
-                                <section id="plateforme" class="">
-
-                                  <?php
-
-                                  $plateforme = "";
-
-                                  if (isset($_POST['plateformeSelect'])) {
-
-                                    $plateforme = " WHERE ";
-
-                                    foreach($_POST["plateformeSelect"] as $ps) $plateforme .= ($plateforme != " WHERE " ? " OR " : "") . 'Plateforme LIKE "%' . htmlentities($ps) . '%"';
-
-                                  }
-
-                                    $query = $bdd->query('SELECT * FROM jeux' . $plateforme);
-
-
-                                  ?>
-
-                                  <div class="container">
-
-                                    <div class="title-box">
-
-                                      <h2>Plateforme</h2>
-
-                                    </div>
-
-                                    <div class="row">
-
-
-                                      <?php
-
-                                        while ($donnees = $query->fetch()) {
-
-                                      ?>
-
-
-                                      <div class="col-sm-6 col-md-3"> 
-
-                                        <div class="product-top">
-
-                                          <a href="produit.php?idSelect=<?= $donnees['id'] ?>"><img src="<?= $donnees['LienCover'] ?>"></a>
-
-                                          <div class="overlay-right">
-
-                                            <a type="button" class="btn btn-secondary" title="Voir la page du jeu" href="produit.php?idSelect=<?= $donnees['id'] ?>">
-
-                                              <i class="fa fa-eye"></i>
-
-                                            </a>
-
-                                            <a type="button" class="btn btn-secondary" title="Ajouter à la liste de souhait" href="404.php">
-
-                                              <i class="fa fa-heart-o"></i>
-
-                                            </a>
-
-                                            <a type="button" class="btn btn-secondary" title="Ajouter au panier" href="404.php">
-
-                                              <i class="fa fa-shopping-cart"></i>
-
-                                            </a>
-
-                                          </div>
-
-                                        </div>
-
-                                        <div class="product-bottom text-center">
-
-                                          <h5><?= $donnees['Titre'] ?></h5>
-
-                                          <h5><?= $donnees['Prix'] ?> €</h5>
-
-                                        </div>
-
-                                      </div>
-
-                                      <?php
-                                        }
-                                      ?>
-
-                                    </div>
-
-                                  </div>
-
-                                </section>
-
-
-                                <hr>
-
-                                <div class="text-center">
-
+          <!-- </div> -->
          
-                                <a id="haut" href="index.php">Retour en haut de la page</a>
-              <!-- </div>                         -->
 
-                </div>
 
-                <hr>
+          <!-- ========================= sidebar ===================== -->
+
+          <div class="container col-2 bcolor rounded" id="sidebar">
+
+
+            <div class="toggle-button" id="toggle-button">
+
+              <span></span>
+
+              <span></span>
+
+              <span></span>
+
+            </div>   
+
+            <div class="w-100 text-center px-2 py-4">
+
+              <form id="products" method="post" action="index.php">
+
+                  <li class="productsTitle">
+
+                    <p>Categorie</p>
+
+                  </li>
+
+                  <ul>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="Action" name="categorieSelect[]" value="Action">
+
+                    <label for="Action">Action</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="Aventure" name="categorieSelect[]" value="Aventure">
+
+                    <label for="Aventure">Aventure</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="Plateforme" name="categorieSelect[]" value="Plateforme">
+
+                    <label for="Plateforme">Plateforme</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="RPG" name="categorieSelect[]" value="RPG">
+
+                    <label for="RPG">RPG</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="Survie" name="categorieSelect[]" value="Survie">
+
+                    <label for="Survie">Survie</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="Combat" name="categorieSelect[]" value="Combat">
+
+                    <label for="Combat">Combat</label></li>
+
+                  </ul>
+
+                  <hr>
+
+                  <li class="productsTitle">
+
+                    <p>Plateforme</p>
+
+                  </li>
+
+                  <ul>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="switch" name="plateformeSelect[]" value="Switch">
+
+                      <label for="switch">Switch</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="wiiU" name="plateformeSelect[]" value="Wii U">
+
+                      <label for="wiiU">Wii U</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="PS4" name="plateformeSelect[]" value="PS4">
+
+                      <label for="PS4">PS4</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="PC" name="plateformeSelect[]" value="PC">
+
+                      <label for="PC">PC</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="xboxOne" name="plateformeSelect[]" value="Xbox One">
+
+                      <label for="xboxOne">Xbox One</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="xboxSeriesX" name="plateformeSelect[]" value="Xbox Series X">
+
+                      <label for="xboxSeriesX">Xbox Series X</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="NES" name="plateformeSelect[]" value="NES">
+
+                      <label for="NES">NES</label></li>
+
+                    <li><input class="sideBarCheckbox" type="checkbox" id="SNES" name="plateformeSelect[]" value="SNES">
+
+                      <label for="SNES">SNES</label></li>
+
+                    <div class="text-center">
+
+                      <input class="sideBarFiltre" type="Submit" name="filtre" value="Filtrer">
+
+                    </div>
+
+                  </ul>
+
+                  <hr>
+
+                  <li class="productsTitle">
+
+                    <p>Special</p>
+
+                  </li>
+
+                  <ul class="text-center">
+
+                    <li><a href="/catalogueACS/index.php?specialSelect=Exclu">Exclu</a></li>
+
+                    <li><a href="/catalogueACS/index.php?specialSelect=Retro">Retro</a></li>
+
+                    <li><a href="/catalogueACS/index.php?specialSelect=Nouveauté">Nouveauté</a></li>
+
+                    <li><a href="/catalogueACS/index.php?specialSelect=A venir">A venir</a></li>
+
+                  </ul>
+
+              </form>
+
+              <hr>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
 
       </div>
 
 
+    </div>
 
 
+    <!-- ========================= services ===================== -->
+    
+    <section class="website-features">
 
+      <div class="container">
 
+        <div class="row">
 
+          <div class="col-md-3 feature-box">
 
+            <img src="img/garant.jfif">
 
+            <div class="feature-text">
 
+              <p><b>100% Original items </b>are available at company</p>
 
+            </div>
 
-                  <div class="container col-2 bcolor rounded" id="sidebar">
+          </div>
 
+          <div class="col-md-3 feature-box">
 
-                          <div class="toggle-button" id="toggle-button">
+            <img src="img/return1.jpg">
 
-                            <span></span>
+            <div class="feature-text">
 
-                            <span></span>
+              <p><b>Return within 30 days </b>of receiving your order.</p>
 
-                            <span></span>
+            </div>
 
-                          </div>   
+          </div>
 
-                          <div class="w-100 text-center px-2 py-4">
+          <div class="col-md-3 feature-box">
 
-                            <form id="products" method="post" action="index.php">
+            <img src="img/free.webp">
 
-                                <li class="productsTitle">
+            <div class="feature-text">
 
-                                  <p>Categorie</p>
+              <p><b>Get free delivery for every </b>order on more than price.</p>
 
-                                </li>
+            </div>
 
-                                <ul>
+          </div>
 
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="Action" name="categorieSelect[]" value="Action">
+          <div class="col-md-3 feature-box">
 
-                                  <label for="Action">Action</label></li>
+            <img src="img/pay.png">
 
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="Aventure" name="categorieSelect[]" value="Aventure">
+            <div class="feature-text">
 
-                                  <label for="Aventure">Aventure</label></li>
+              <p><b>Pay Online through multiple</b>options (card/Net banking)</p>
 
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="Plateforme" name="categorieSelect[]" value="Plateforme">
+            </div>
 
-                                  <label for="Plateforme">Plateforme</label></li>
+          </div>
 
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="RPG" name="categorieSelect[]" value="RPG">
+        </div>
 
-                                  <label for="RPG">RPG</label></li>
+      </div>
+      
 
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="Survie" name="categorieSelect[]" value="Survie">
+    </section>
 
-                                  <label for="Survie">Survie</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="Combat" name="categorieSelect[]" value="Combat">
-
-                                  <label for="Combat">Combat</label></li>
-
-                                </ul>
-
-                                <hr>
-
-                                <li class="productsTitle">
-
-                                  <p>Plateforme</p>
-
-                                </li>
-
-                                <ul>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="switch" name="plateformeSelect[]" value="Switch">
-
-                                    <label for="switch">Switch</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="wiiU" name="plateformeSelect[]" value="Wii U">
-
-                                    <label for="wiiU">Wii U</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="PS4" name="plateformeSelect[]" value="PS4">
-
-                                    <label for="PS4">PS4</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="PC" name="plateformeSelect[]" value="PC">
-
-                                    <label for="PC">PC</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="xboxOne" name="plateformeSelect[]" value="Xbox One">
-
-                                    <label for="xboxOne">Xbox One</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="xboxSeriesX" name="plateformeSelect[]" value="Xbox Series X">
-
-                                    <label for="xboxSeriesX">Xbox Series X</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="NES" name="plateformeSelect[]" value="NES">
-
-                                    <label for="NES">NES</label></li>
-
-                                  <li><input class="sideBarCheckbox" type="checkbox" id="SNES" name="plateformeSelect[]" value="SNES">
-
-                                    <label for="SNES">SNES</label></li>
-
-                                  <div class="text-center">
-
-                                    <input class="sideBarFiltre" type="Submit" name="filtre" value="Filtrer">
-
-                                  </div>
-
-                                </ul>
-
-                                <hr>
-
-                                <li class="productsTitle">
-
-                                  <p>Special</p>
-
-                                </li>
-
-                                <ul class="text-center">
-
-                                  <li><a href="/catalogueACS/index.php?specialSelect=Exclu">Exclu</a></li>
-
-                                  <li><a href="/catalogueACS/index.php?specialSelect=Retro">Retro</a></li>
-
-                                  <li><a href="/catalogueACS/index.php?specialSelect=Nouveauté">Nouveauté</a></li>
-
-                                  <li><a href="/catalogueACS/index.php?specialSelect=A venir">A venir</a></li>
-
-                                </ul>
-
-                            </form>
-
-                            <hr>
-
-                          </div>
-
-                  </div>
-
-                  </div>
-
-
-                        </div>
-                      
-                    </div>
-                    <!-- website features -->
-                    <section class="website-features">
-
-                      <div class="container">
-
-                        <div class="row">
-
-                          <div class="col-md-3 feature-box">
-
-                            <img src="img/garant.jfif">
-
-                            <div class="feature-text">
-
-                              <p><b>100% Original items </b>are available at company</p>
-
-                            </div>
-
-                          </div>
-
-                          <div class="col-md-3 feature-box">
-
-                            <img src="img/return1.jpg">
-
-                            <div class="feature-text">
-
-                              <p><b>Return within 30 days </b>of receiving your order.</p>
-
-                            </div>
-
-                          </div>
-
-                          <div class="col-md-3 feature-box">
-
-                            <img src="img/free.webp">
-
-                            <div class="feature-text">
-
-                              <p><b>Get free delivery for every </b>order on more than price.</p>
-
-                            </div>
-
-                          </div>
-
-                          <div class="col-md-3 feature-box">
-
-                            <img src="img/pay.png">
-
-                            <div class="feature-text">
-
-                              <p><b>Pay Online through multiple</b>options (card/Net banking)</p>
-
-                            </div>
-
-                          </div>
-
-                        </div>
-
-                      </div>
-                      
-        
-                    </section>
 </main>
 
 <?php include "footer.php" ?>
