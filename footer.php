@@ -7,6 +7,10 @@ else {
 }
 ?>
 
+
+
+
+
 <footer id="footer" class="container<?php echo $fluid ?> text-center">
 
     <div id="realisation" class="p-2"><a id="github" href="https://github.com/Philpof/catalogueACS" target="_blank"><i class="fab fa-github"></i></a> | Site réalisé en HTML - CSS - PHP - MySQL - javascript</div>
