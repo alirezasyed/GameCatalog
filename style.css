@@ -2,6 +2,10 @@
   font-size: 16px;
 }
 
+
+/* =============== Main ================== */
+
+
 * {
   margin: 0px;
   padding: 0px;
@@ -129,7 +133,7 @@ main {
   transition: 0.5s ease;
 }
 
-/* ==================Sidebar Menu Items================== */
+/* ================== Sidebar Menu Items ================== */
 .productsTitle p {
   background-color: purple;
   color: white;
@@ -217,14 +221,6 @@ main {
   color: white;
 }
 
-/* #plateforme {
-  padding-top: 6rem;
-}
-
-#categorie {
-  padding-top: 6rem;
-} */
-
 .categorie {
   padding: 10px;
   display: flex;
@@ -272,6 +268,8 @@ main {
   border: 1px solid purple;
 }
 
+/* =============== Scrollbar ================== */
+
 /* Hide scrollbar for Chorme, Opera and Safari */
 
 .description::-webkit-scrollbar {
@@ -316,6 +314,9 @@ main {
   width: auto;
   height: 300px;
 }
+
+/* =============== Navbar ================== */
+
 
 #navBarre {
   background: linear-gradient(to left, #851dcb, #7e1697, #a71375);
@@ -494,7 +495,7 @@ tr:hover {
   color: black;
 }
 
-/* Admin.php */
+/* =============== Admin ================== */
 
 #adminDescription {
   table-layout: auto;
@@ -505,14 +506,14 @@ tr:hover {
   vertical-align: middle;
 }
 
-/* 404 */
+/* =============== 404 ================== */
 
 #page404 {
   background-color: #ffffff;
   padding-top: 7em;
 }
 
-/* Produits */
+/* =============== products ================== */
 
 .cover {
   width: 150px;
@@ -529,6 +530,9 @@ tr:hover {
   display: block;
 }
 
+/* =============== carousel ================== */
+
+
 .carousel {
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
 }
@@ -537,7 +541,9 @@ tr:hover {
   z-index: 1 !important;
 }
 
-/* -----------featured-categories------------ */
+
+
+/* =============== carousel ================== */
 
 .featured-categories {
   margin: 50px 0;
@@ -553,7 +559,7 @@ tr:hover {
   transform: scale(1.1);
 }
 
-/* -------On sale--------- */
+/* =============== on sale ================== */
 
 .title-box {
   background: purple;
@@ -615,7 +621,7 @@ tr:hover {
   transition: 0.5s;
 }
 
-/* ---------product-bottom---------- */
+/* =============== product Bottom ================== */
 
 .product-bottom .fa {
   color: orange;
@@ -646,18 +652,6 @@ tr:hover {
   padding-top: 20px;
 }
 
-/* .featured-categories{
-    margin: 50px 0;
-}
-.featured-categories img{
-    width: 100%;
-    padding: 20px 0;
-    cursor: pointer;
-}
-.featured-categories img:hover{
-
-    transform: scale(1.1);
-} */
 
 .bcolor li {
   list-style: none;
@@ -684,6 +678,10 @@ tr:hover {
   background-color: purple;
   border: 2px solid black;
 }
+
+
+/* =============== media queries ================== */
+
 
 @media (max-width: 1199.98px) {
   .toggle-button {
