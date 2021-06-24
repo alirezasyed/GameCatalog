@@ -388,130 +388,137 @@ include "header.php";
 
           <div class="container col-2 bcolor rounded" id="sidebar">
 
+              <div class="col-2">
 
-            <div class="toggle-button" id="toggle-button">
+                  <div class="bcolor rounded" id="sidebar">
 
-              <span></span>
+                      <div class="toggle-button" id="toggle-button">
 
-              <span></span>
+                        <span></span>
 
-              <span></span>
+                        <span></span>
 
-            </div>   
+                        <span></span>
 
-            <div class="w-100 text-center px-2 py-4">
+                      </div>   
 
-              <form id="products" method="post" action="index.php">
+                      <div class="w-100 text-center px-2 py-4">
 
-                  <li class="productsTitle">
+                        <form id="products" method="post" action="index.php">
 
-                    <p>Categorie</p>
+                            <li class="productsTitle">
 
-                  </li>
+                              <p>Categorie</p>
 
-                  <ul>
+                            </li>
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="Action" name="categorieSelect[]" value="Action">
+                            <ul>
 
-                    <label for="Action">Action</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="Action" name="categorieSelect[]" value="Action">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="Aventure" name="categorieSelect[]" value="Aventure">
+                              <label for="Action">Action</label></li>
 
-                    <label for="Aventure">Aventure</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="Aventure" name="categorieSelect[]" value="Aventure">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="Plateforme" name="categorieSelect[]" value="Plateforme">
+                              <label for="Aventure">Aventure</label></li>
 
-                    <label for="Plateforme">Plateforme</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="Plateforme" name="categorieSelect[]" value="Plateforme">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="RPG" name="categorieSelect[]" value="RPG">
+                              <label for="Plateforme">Plateforme</label></li>
 
-                    <label for="RPG">RPG</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="RPG" name="categorieSelect[]" value="RPG">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="Survie" name="categorieSelect[]" value="Survie">
+                              <label for="RPG">RPG</label></li>
 
-                    <label for="Survie">Survie</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="Survie" name="categorieSelect[]" value="Survie">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="Combat" name="categorieSelect[]" value="Combat">
+                              <label for="Survie">Survie</label></li>
 
-                    <label for="Combat">Combat</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="Combat" name="categorieSelect[]" value="Combat">
 
-                  </ul>
+                              <label for="Combat">Combat</label></li>
 
-                  <hr>
+                            </ul>
 
-                  <li class="productsTitle">
+                            <hr>
 
-                    <p>Plateforme</p>
+                            <li class="productsTitle">
 
-                  </li>
+                              <p>Plateforme</p>
 
-                  <ul>
+                            </li>
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="switch" name="plateformeSelect[]" value="Switch">
+                            <ul>
 
-                      <label for="switch">Switch</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="switch" name="plateformeSelect[]" value="Switch">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="wiiU" name="plateformeSelect[]" value="Wii U">
+                                <label for="switch">Switch</label></li>
 
-                      <label for="wiiU">Wii U</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="wiiU" name="plateformeSelect[]" value="Wii U">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="PS4" name="plateformeSelect[]" value="PS4">
+                                <label for="wiiU">Wii U</label></li>
 
-                      <label for="PS4">PS4</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="PS4" name="plateformeSelect[]" value="PS4">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="PC" name="plateformeSelect[]" value="PC">
+                                <label for="PS4">PS4</label></li>
 
-                      <label for="PC">PC</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="PC" name="plateformeSelect[]" value="PC">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="xboxOne" name="plateformeSelect[]" value="Xbox One">
+                                <label for="PC">PC</label></li>
 
-                      <label for="xboxOne">Xbox One</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="xboxOne" name="plateformeSelect[]" value="Xbox One">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="xboxSeriesX" name="plateformeSelect[]" value="Xbox Series X">
+                                <label for="xboxOne">Xbox One</label></li>
 
-                      <label for="xboxSeriesX">Xbox Series X</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="xboxSeriesX" name="plateformeSelect[]" value="Xbox Series X">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="NES" name="plateformeSelect[]" value="NES">
+                                <label for="xboxSeriesX">Xbox Series X</label></li>
 
-                      <label for="NES">NES</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="NES" name="plateformeSelect[]" value="NES">
 
-                    <li><input class="sideBarCheckbox" type="checkbox" id="SNES" name="plateformeSelect[]" value="SNES">
+                                <label for="NES">NES</label></li>
 
-                      <label for="SNES">SNES</label></li>
+                              <li><input class="sideBarCheckbox" type="checkbox" id="SNES" name="plateformeSelect[]" value="SNES">
 
-                    <div class="text-center">
+                                <label for="SNES">SNES</label></li>
 
-                      <input class="sideBarFiltre" type="Submit" name="filtre" value="Filtrer">
+                              <div class="text-center">
 
-                    </div>
+                                <input class="sideBarFiltre" type="Submit" name="filtre" value="Filtrer">
 
-                  </ul>
+                              </div>
 
-                  <hr>
+                            </ul>
 
-                  <li class="productsTitle">
+                            <hr>
 
-                    <p>Special</p>
+                            <li class="productsTitle">
 
-                  </li>
+                              <p>Special</p>
 
-                  <ul class="text-center">
+                            </li>
 
-                    <li><a href="/catalogueACS/index.php?specialSelect=Exclu">Exclu</a></li>
+                            <ul class="text-center">
 
-                    <li><a href="/catalogueACS/index.php?specialSelect=Retro">Retro</a></li>
+                              <li><a href="/catalogueACS/index.php?specialSelect=Exclu">Exclu</a></li>
 
-                    <li><a href="/catalogueACS/index.php?specialSelect=Nouveauté">Nouveauté</a></li>
+                              <li><a href="/catalogueACS/index.php?specialSelect=Retro">Retro</a></li>
 
-                    <li><a href="/catalogueACS/index.php?specialSelect=A venir">A venir</a></li>
+                              <li><a href="/catalogueACS/index.php?specialSelect=Nouveauté">Nouveauté</a></li>
 
-                  </ul>
+                              <li><a href="/catalogueACS/index.php?specialSelect=A venir">A venir</a></li>
 
-              </form>
+                            </ul>
 
-              <hr>
+                        </form>
 
-            </div>
+                        <hr>
+
+                      </div>
+
+                  </div>
+
+              </div>
 
           </div>
 
