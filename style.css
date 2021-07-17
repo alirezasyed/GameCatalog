@@ -29,6 +29,8 @@ section {
 
 #main {
   padding-top: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .container {
@@ -77,11 +79,10 @@ main {
   display: none;
 }
 
-/* ===============Sidebar Menu================== */
+/* =============== Sidebar Menu ================== */
 
-#sidebar {
-  position: fixed;
-  /* right: -397px; */
+/* #sidebar {
+  position: absolute;
   transition: 0.5s ease-out;
   z-index: 5;
   top: 37%;
@@ -110,11 +111,11 @@ main {
 }
 #sidebar.active span:nth-child(3) {
   transform: rotate(-45deg);
-}
+} */
 
 /* #sidebar.active  */
 
-.toggle-button {
+/* .toggle-button {
   width: 35px;
   height: 30px;
   position: absolute;
@@ -131,9 +132,13 @@ main {
   display: block;
   margin-top: 4px;
   transition: 0.5s ease;
-}
+} */
 
 /* ================== Sidebar Menu Items ================== */
+#aside {
+  margin-top: 7.5%;
+  width: 16%;
+} 
 .productsTitle p {
   background-color: purple;
   color: white;
@@ -682,12 +687,26 @@ tr:hover {
 
 /* =============== media queries ================== */
 
+/* @media only screen and (min-width: 1200px) {
 
-@media (max-width: 1199.98px) {
+  #aside {
+    margin-top: 7.5%;
+    width: 16%;
+  } 
+} */
+
+
+
+
+@media only screen and (max-width: 1199.98px) {
 
   /* .toggle-button {
     left: -300px;
   } */
+
+  #aside {
+    margin-top: 9%;
+  }
 
   .produit {
     flex-direction: column !important;
@@ -732,6 +751,63 @@ tr:hover {
 }
 
 @media only screen and (max-width: 991.98px) {
+
+  #sidebar {
+  position: absolute;
+  transition: 0.5s ease-out;
+  z-index: 5;
+  top: 37%;
+  right: -17%;
+}
+
+#sidebar.active {
+  right: 0px !important;
+  width: 184px;
+}
+
+#sidebar.active .toggle-button {
+  top: 20px;
+  left: -50%;
+}
+
+#sidebar.active span {
+  position: absolute;
+}
+
+#sidebar.active span:nth-child(1) {
+  transform: rotate(45deg);
+}
+#sidebar.active span:nth-child(2) {
+  opacity: 0;
+}
+#sidebar.active span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* #sidebar.active  */
+
+.toggle-button {
+  width: 35px;
+  height: 30px;
+  position: absolute;
+  top: 1%;
+  left: -269px;
+  cursor: pointer;
+}
+
+.toggle-button span {
+  width: 60px;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(to left, #851dcb, #7e1697, #a71375);
+  display: block;
+  margin-top: 4px;
+  transition: 0.5s ease;
+}
+
+
+
+
 
 
   /* #sidebar {
