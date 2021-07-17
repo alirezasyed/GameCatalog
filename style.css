@@ -687,16 +687,6 @@ tr:hover {
 
 /* =============== media queries ================== */
 
-/* @media only screen and (min-width: 1200px) {
-
-  #aside {
-    margin-top: 7.5%;
-    width: 16%;
-  } 
-} */
-
-
-
 
 @media only screen and (max-width: 1199.98px) {
 
@@ -706,6 +696,7 @@ tr:hover {
 
   #aside {
     margin-top: 9%;
+    position: relative;
   }
 
   .produit {
@@ -756,17 +747,19 @@ tr:hover {
   position: absolute;
   transition: 0.5s ease-out;
   z-index: 5;
-  top: 37%;
-  right: -17%;
+  /* top: 3.5%; */
+  left: 225%;
 }
 
 #sidebar.active {
-  right: 0px !important;
+  /* right: 0px !important; */
   width: 184px;
+  left: -19%;
+  top: 21px;
 }
 
 #sidebar.active .toggle-button {
-  top: 20px;
+  top: -62px;
   left: -50%;
 }
 
@@ -790,8 +783,8 @@ tr:hover {
   width: 35px;
   height: 30px;
   position: absolute;
-  top: 1%;
-  left: -269px;
+  top: -6%;
+  left: -288px;
   cursor: pointer;
 }
 
@@ -804,31 +797,6 @@ tr:hover {
   margin-top: 4px;
   transition: 0.5s ease;
 }
-
-
-
-
-
-
-  /* #sidebar {
-    position: absolute;
-    right: -397px;
-    transition: 0.5s ease-out;
-    z-index: 5;
-  }
-
-  .toggle-button {
-    left: -420px;
-  } */
-
-  /* #sidebar.active .toggle-button {
-    left: -50%;
-  }
-
-  #sidebar.active {
-    right: 54px !important;
-    min-width: 17%;
-  } */
 
   #products p,
   label,
@@ -847,19 +815,46 @@ tr:hover {
 
 @media only screen and (max-width: 767.98px) {
 
-  /* #sidebar.active {
-    right: 29px !important;
-    min-width: 21%;
-  } */
+  #sidebar.active {
+    /* min-width: 21%; */ 
+    left: -117%;
+    top: 36px;
+  }
+
+  #sidebar.active .toggle-button {
+    top: -51px;
+    left: -50%;
 }
 
+.toggle-button {
+  top: -4%;
+  left: -292px;
+}
+
+}
 
 @media only screen and (max-width: 575.98px) {
 
   /* #sidebar.active {
-    right: 7px !important;
     min-width: 23%;
 } */
+#sidebar {
+  left: 400%;
+}
+#sidebar.active {
+  left: -226%;
+  top: 36px;
+}
+
+#sidebar.active .toggle-button {
+  top: 19px;
+  left: -94%;
+}
+
+.toggle-button {
+  top: -2%;
+left: -345px;
+}
 
 .sideBarFiltre {
   margin-left: -19px;
