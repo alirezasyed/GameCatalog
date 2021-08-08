@@ -137,21 +137,38 @@
 
 <!-- Le HTML -->
 
-  <nav id="navBarre" class="container-fluid fixed-top">
-    <div class="row justify-content-around py-3 align-items-center">
-      <a class="" href="admin.php"><?php echo $admin ?></a>
+<div class="navBar">  
+  
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
 
-      <a id="clic" class="font-weight-bold" href="index.php"><img class="logo" src="img/icones/GRAP.fr.png" alt="Logo"><img class="logo" src="img/icones/GRAP.fr_inverse.png" alt="Logo">GRAP.fr</a>
+        <a class="" href="admin.php"><?php echo $admin ?></a>
 
-      <form method="post" action="recherche.php">
-        <input class="pl-3 search-txt" type="search" name="jeux" placeholder="Indiquez le jeux recherché">
-        <button type="submit" class="btn-search"><i id="loupe" class="fas fa-search"></i></button>
-      </form>
-      <a href="<?php echo $goLog ?>.php"><?php echo $connexion ?></a>
-      <a href="panier.php"><i class="fas fa-cart-arrow-down"></i> Mon Panier</a>
-    </div>
-    <?php
-    echo $bienvenue;
-    ?>
+        <div class="img-brand">
+           <a id="clic" class="font-weight-bold" href="index.php"><img class="logo" src="img/icones/GRAP.fr.png" alt="Logo"><img class="logo" src="img/icones/GRAP.fr_inverse.png" alt="Logo">GRAP.fr</a>
+        </div>
 
-  </nav>
+        <button type="button" class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <div class="navbar-nav">
+                <a href="<?php echo $goLog ?>.php" class=""><?php echo $connexion ?></a>
+                <a href="panier.php" class=""><i class="fas fa-cart-arrow-down"></i> Mon Panier</a>
+            </div>
+            <form method="post" class="form mt-2 ml-auto" action="recherche.php">
+                <input type="search" name="jeux" class="pl-3 search-txt" placeholder="Indiquez le jeux recherché">
+                <button type="submit" class="btn"><i id="loupe" class="fas fa-search"></i></button>
+            </form>
+            
+        </div>
+
+    </nav>
+
+      <div class="col-md-12">
+      <?php
+      echo $bienvenue;
+      ?>
+      </div>
+</div>
